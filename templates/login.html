@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f5ef">
+  <title>Sign in | Medica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="login-page">
+  <main class="login-panel">
+    <a class="brand" href="/" aria-label="Medica home">
+      <span class="brand-mark" aria-hidden="true">+</span>
+      <span>medica<span class="brand-period">.</span></span>
+    </a>
+    <p class="eyebrow">PRIVATE REFERENCE LIBRARY</p>
+    <h1>Sign in to<br><em>your library.</em></h1>
+    <p class="welcome-copy">Your uploaded references are isolated to your account. For educational information only, not diagnosis or treatment.</p>
+    {% if error %}<p class="login-error" role="alert">{{ error }}</p>{% endif %}
+    {% if signed_out %}<p class="setup-notice" role="status">You have signed out.</p>{% endif %}
+    {% if configured %}
+      <a class="auth-button" href="{{ url_for('login') }}">Continue with Auth0 <span aria-hidden="true">&#8594;</span></a>
+    {% else %}
+      <div class="setup-notice" role="status">
+        <strong>Auth0 setup required</strong>
+        <p>Set AUTH0_DOMAIN, AUTH0_CLIENT_ID, AUTH0_CLIENT_SECRET, AUTH0_CALLBACK_URL, and SESSION_SECRET in your local .env file.</p>
+      </div>
+    {% endif %}
+    <p class="login-footnote">Do not upload patient-identifying or private health information.</p>
+  </main>
+</body>
+</html>

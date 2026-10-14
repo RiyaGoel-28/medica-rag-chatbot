@@ -1,0 +1,16 @@
+[
+  {
+    "query": "What causes or triggers tension-type headaches?",
+    "expected_sources": [
+      "headache-a-comprehensive-overview-of-causes-diagnosis-and-treatment.pdf"
+    ],
+    "expected_terms": ["tension-type headache"]
+  },
+  {
+    "query": "What does the reference say about sinus headaches?",
+    "expected_sources": [
+      "headache-a-comprehensive-overview-of-causes-diagnosis-and-treatment.pdf"
+    ],
+    "expected_terms": ["sinus headache"]
+  }
+]

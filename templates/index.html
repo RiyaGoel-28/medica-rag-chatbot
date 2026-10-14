@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f5ef">
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <title>Medica | Reference assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Application information">
+      <a class="brand" href="/" aria-label="Medica home">
+        <span class="brand-mark" aria-hidden="true">+</span>
+        <span>medica<span class="brand-period">.</span></span>
+      </a>
+      <div class="sidebar-rule"></div>
+      <p class="eyebrow">REFERENCE ASSISTANT</p>
+      <p class="sidebar-copy">A clearer way to explore information from your indexed medical references.</p>
+      <div class="sidebar-status"><span class="status-dot"></span> {{ current_user.name }}</div>
+      <div class="sidebar-note">
+        <span class="note-icon" aria-hidden="true">i</span>
+        <p>Educational use only, not diagnosis or treatment. Uploaded PDFs join this local shared library. Avoid patient identifiers or private health details.</p>
+      </div>
+      <p class="sidebar-credit">A student project concept<br>Department of Computer Science</p>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <div class="topbar-label"><span class="topbar-symbol" aria-hidden="true">⌕</span> Medical information</div>
+        <div class="header-actions">
+          <span class="topbar-tag">REFERENCE-BASED</span>
+          <input class="visually-hidden" id="pdf-upload" type="file" accept="application/pdf,.pdf" aria-label="Choose a PDF reference">
+          <button class="upload-button" id="upload-trigger" type="button" title="Add a PDF to this local library">
+            <span aria-hidden="true">+</span> Add PDF
+          </button>
+          <form action="{{ url_for('logout') }}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <button class="logout-button" type="submit" title="Sign out">Sign out</button>
+          </form>
+        </div>
+      </header>
+      <p class="upload-status" id="upload-status" role="status" aria-live="polite"></p>
+      <section class="library-strip" aria-label="Your reference documents">
+        <div class="library-heading"><span>YOUR LIBRARY</span><span id="library-count">Loading...</span></div>
+        <div class="document-list" id="document-list" aria-live="polite"></div>
+      </section>
+
+      <section class="conversation" aria-live="polite" aria-label="Chat conversation" id="conversation">
+        <div class="welcome" id="welcome">
+          <div class="welcome-kicker"><span class="kicker-line"></span> YOUR REFERENCE COMPANION</div>
+          <h1>Good questions<br><em>start here.</em></h1>
+          <p class="welcome-copy">Ask about a topic in the indexed reference library. Answers are generated from retrieved text, with source details when available.</p>
+          <div class="prompt-label">TRY A QUESTION</div>
+          <div class="suggestions">
+            <button class="suggestion" type="button" data-question="What are common causes of a headache?">What are common causes of a headache?<span aria-hidden="true">↗</span></button>
+            <button class="suggestion" type="button" data-question="What does the reference say about sleep and health?">What does the reference say about sleep and health?<span aria-hidden="true">↗</span></button>
+          </div>
+        </div>
+      </section>
+
+      <div class="composer-wrap">
+        <form class="composer" id="chat-form">
+          <label class="visually-hidden" for="question">Ask a medical information question</label>
+          <textarea id="question" name="question" rows="1" maxlength="1000" placeholder="Ask about your reference library..." required></textarea>
+          <button class="send-button" type="submit" aria-label="Send question" title="Send question">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12h14m-6-6 6 6-6 6"/></svg>
+          </button>
+        </form>
+        <p class="composer-disclaimer">Informational only, not for diagnosis or treatment. Do not upload patient-identifying information.</p>
+      </div>
+    </main>
+  </div>
+  <script src="{{ url_for('static', filename='js/chat.js') }}" defer></script>
+</body>
+</html>

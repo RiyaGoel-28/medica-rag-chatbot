@@ -1,0 +1,16 @@
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+data/references/*.pdf
+data/uploads/
+instance/
+mobile/.env
+mobile/node_modules/
+mobile/.expo/
+mobile/dist/
+mobile/web-build/
+mobile/android/
+mobile/ios/
+tests-temp/
